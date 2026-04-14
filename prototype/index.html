@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>WCM App Prototype</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Phone Frame Wrapper -->
+<div class="phone-frame">
+  <div class="status-bar">
+    <span class="time" id="statusTime">9:41</span>
+    <span class="icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></span>
+  </div>
+
+  <!-- Header -->
+  <div class="app-header" id="appHeader">
+    <div class="header-left" id="headerBack" style="display:none" onclick="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    <div class="header-title" id="headerTitle">
+      <img src="logo-icon.svg" alt="WCM" class="header-logo" id="headerLogo">
+      <img src="logo-text.svg" alt="Wembley Central Masjid" class="header-logo-text" id="headerLogoText">
+      <span id="headerText" style="display:none">Wembley Central Masjid</span>
+    </div>
+    <div class="header-right">
+      <i class="fas fa-bell"></i>
+    </div>
+  </div>
+
+  <!-- Screen Container -->
+  <div class="screen-container" id="screenContainer">
+
+    <!-- HOME SCREEN -->
+    <div class="screen active" id="screen-home">
+      <!-- Hero: Next Prayer -->
+      <div class="home-hero">
+        <div class="hero-next">
+          <div class="hero-next-left">
+            <span class="hero-prayer-name">Zuhr</span>
+            <span class="hero-iqamah">Iqamah in 2 hours</span>
+          </div>
+          <span class="hero-time">1:30 <span class="hero-ampm">PM</span></span>
+        </div>
+      </div>
+
+      <!-- Prayer Times -->
+      <div class="prayer-card">
+        <div class="prayer-card-header">
+          <h2>Salaah Times</h2>
+          <span class="prayer-card-date">31 Mar <span class="hijri-badge">12 Shawwal</span></span>
+        </div>
+        <div class="prayer-rows">
+          <div class="prayer-row"><span class="pr-name">Fajr</span><span class="pr-begin">5:03</span><span class="pr-iqamah">5:45</span></div>
+          <div class="prayer-row muted"><span class="pr-name">Sunrise</span><span class="pr-begin">6:35</span><span class="pr-iqamah"></span></div>
+          <div class="prayer-row active"><span class="pr-name">Zuhr</span><span class="pr-begin">1:10</span><span class="pr-iqamah">1:30</span></div>
+          <div class="prayer-row"><span class="pr-name">Asr</span><span class="pr-begin">5:29</span><span class="pr-iqamah">6:00</span></div>
+          <div class="prayer-row"><span class="pr-name">Maghrib</span><span class="pr-begin">7:35</span><span class="pr-iqamah">7:35</span></div>
+          <div class="prayer-row"><span class="pr-name">Isha</span><span class="pr-begin">8:52</span><span class="pr-iqamah">9:15</span></div>
+          <div class="prayer-row muted"><span class="pr-name">Jumuah</span><span class="pr-begin" style="grid-column:2/4;text-align:center">1:30 & 2:15</span></div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <div class="quick-action" onclick="showScreen('donate')">
+          <div class="quick-icon donate-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <span>Donate</span>
+        </div>
+        <div class="quick-action" onclick="showScreen('events')">
+          <div class="quick-icon events-icon"><i class="fas fa-calendar-alt"></i></div>
+          <span>Events</span>
+        </div>
+        <div class="quick-action" onclick="showSubScreen('qibla')">
+          <div class="quick-icon qibla-icon"><i class="fas fa-compass"></i></div>
+          <span>Qibla</span>
+        </div>
+        <div class="quick-action" onclick="showSubScreen('ask-scholar')">
+          <div class="quick-icon scholar-icon"><i class="fas fa-question-circle"></i></div>
+          <span>Scholar</span>
+        </div>
+      </div>
+
+      <!-- Announcement -->
+      <div class="notice-strip" onclick="showSubScreen('stadium')">
+        <i class="fas fa-car"></i>
+        <span>Stadium event days: parking restrictions apply</span>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <!-- Banners -->
+      <div class="banners-section">
+        <div class="banners-track" id="bannersTrack">
+          <div class="banner-slide" onclick="showScreen('donate')">
+            <div class="banner-img banner-sponsor">
+              <div class="banner-content">
+                <div class="banner-badge">Sponsor Campaign</div>
+                <h3>Spare just 30p a day</h3>
+                <p>Become one of 1,000 sponsors</p>
+                <span class="banner-cta">Donate Now <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="banner-slide" onclick="showScreen('madrasah')">
+            <div class="banner-img banner-madrasah">
+              <div class="banner-content">
+                <div class="banner-badge">Enrolment Open</div>
+                <h3>Madrasah Classes</h3>
+                <p>Quran, Arabic, Tajweed and Hifz</p>
+                <span class="banner-cta">Learn More <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="banner-slide" onclick="showSubScreen('ask-scholar')">
+            <div class="banner-img banner-scholar">
+              <div class="banner-content">
+                <div class="banner-badge">Ask the Scholar</div>
+                <h3>Have a Question?</h3>
+                <p>Get a response from our Scholar</p>
+                <span class="banner-cta">Ask Now <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="banner-dots" id="bannerDots"></div>
+      </div>
+
+      <!-- Gallery -->
+      <div class="gallery-section">
+        <div class="gallery-header">
+          <h2>Gallery</h2>
+          <span class="gallery-see-all">See All <i class="fas fa-chevron-right"></i></span>
+        </div>
+        <div class="gallery-slider">
+          <div class="gallery-slide"><img class="gallery-photo" src="gallery-1.jpeg" alt="Masjid"></div>
+          <div class="gallery-slide"><img class="gallery-photo" src="gallery-2.jpg" alt="Masjid"></div>
+          <div class="gallery-slide"><img class="gallery-photo" src="gallery-3.jpg" alt="Masjid"></div>
+          <div class="gallery-slide"><img class="gallery-photo" src="gallery-4.jpg" alt="Masjid"></div>
+          <div class="gallery-slide"><img class="gallery-photo" src="gallery-5.jpg" alt="Masjid"></div>
+          <div class="gallery-slide"><img class="gallery-photo" src="gallery-6.jpg" alt="Masjid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTS SCREEN -->
+    <div class="screen" id="screen-events">
+      <div class="screen-title-bar">
+        <h2>Upcoming Events</h2>
+      </div>
+      <div class="events-list" id="eventsList"></div>
+    </div>
+
+    <!-- DONATE SCREEN -->
+    <div class="screen" id="screen-donate">
+      <div class="donate-header">
+        <div class="donate-header-icon"><i class="fas fa-hand-holding-heart"></i></div>
+        <h2>Support Your Masjid</h2>
+        <p>Your generosity keeps the Masjid running and supports the community</p>
+      </div>
+
+      <div class="donate-card" onclick="showSubScreen('donate-detail', 'zakaat')">
+        <div class="donate-card-icon"><i class="fas fa-balance-scale"></i></div>
+        <div class="donate-card-info">
+          <h3>Zakaat</h3>
+          <p>Fulfil your obligation and purify your wealth</p>
+        </div>
+        <i class="fas fa-chevron-right donate-arrow"></i>
+      </div>
+
+      <div class="donate-card" onclick="showSubScreen('donate-detail', 'sadaqah')">
+        <div class="donate-card-icon"><i class="fas fa-heart"></i></div>
+        <div class="donate-card-info">
+          <h3>Sadaqah</h3>
+          <p>Voluntary charity for the sake of Allah</p>
+        </div>
+        <i class="fas fa-chevron-right donate-arrow"></i>
+      </div>
+
+      <div class="donate-card sponsor" onclick="showSubScreen('donate-detail', 'sponsor')">
+        <div class="donate-card-icon"><i class="fas fa-star"></i></div>
+        <div class="donate-card-info">
+          <h3>Sponsor the Masjid</h3>
+          <p>Just 30p a day. Become one of 1,000 sponsors.</p>
+        </div>
+        <i class="fas fa-chevron-right donate-arrow"></i>
+      </div>
+
+      <div class="donate-card" onclick="showSubScreen('donate-detail', 'general')">
+        <div class="donate-card-icon"><i class="fas fa-mosque"></i></div>
+        <div class="donate-card-info">
+          <h3>General Donation</h3>
+          <p>Help cover running costs and maintenance</p>
+        </div>
+        <i class="fas fa-chevron-right donate-arrow"></i>
+      </div>
+    </div>
+
+    <!-- MADRASAH SCREEN -->
+    <div class="screen" id="screen-madrasah">
+      <div class="screen-title-bar">
+        <h2>Madrasah</h2>
+      </div>
+      <div class="madrasah-intro section-card">
+        <p>Wembley Central Masjid Madrassah offers beginner through advanced classes in various Islamic sciences.</p>
+      </div>
+
+      <div class="section-card">
+        <h3 class="card-title">Class Schedule</h3>
+        <table class="schedule-table">
+          <thead><tr><th>Class</th><th>Days</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr><td>Quran Reading</td><td>Mon - Fri</td><td>5:00 - 6:30 pm</td></tr>
+            <tr><td>Islamic Studies</td><td>Sat - Sun</td><td>10:00 - 12:00 pm</td></tr>
+            <tr><td>Arabic Language</td><td>Sat</td><td>2:00 - 3:30 pm</td></tr>
+            <tr><td>Tajweed</td><td>Sun</td><td>2:00 - 3:30 pm</td></tr>
+            <tr><td>Hifz Programme</td><td>Mon - Fri</td><td>4:00 - 7:00 pm</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3 class="card-title">Enrolment</h3>
+        <p>New admissions are open. Please visit the Masjid office or contact us to register your child.</p>
+        <button class="btn-primary" onclick="showSubScreen('contact')">Contact Us</button>
+      </div>
+    </div>
+
+    <!-- MORE SCREEN -->
+    <div class="screen" id="screen-more">
+      <div class="screen-title-bar">
+        <h2>More</h2>
+      </div>
+      <div class="more-menu">
+        <div class="more-item" onclick="showSubScreen('about')">
+          <i class="fas fa-mosque"></i><span>About the Masjid</span><i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="more-item" onclick="showSubScreen('news')">
+          <i class="fas fa-newspaper"></i><span>Latest News</span><i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="more-item" onclick="showSubScreen('ask-scholar')">
+          <i class="fas fa-question-circle"></i><span>Ask the Scholar</span><i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="more-item" onclick="showSubScreen('qibla')">
+          <i class="fas fa-compass"></i><span>Qibla Direction</span><i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="more-item" onclick="showSubScreen('contact')">
+          <i class="fas fa-phone"></i><span>Contact Us</span><i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="more-item" onclick="showSubScreen('services')">
+          <i class="fas fa-concierge-bell"></i><span>Our Services</span><i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="more-item" onclick="showSubScreen('tour')">
+          <i class="fas fa-vr-cardboard"></i><span>360° Virtual Tour</span><i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-SCREENS -->
+
+    <!-- ABOUT -->
+    <div class="screen sub-screen" id="screen-about">
+      <div class="about-hero" style="background:#159778;padding:24px;color:#fff;text-align:center">
+        <i class="fas fa-mosque" style="font-size:48px;margin-bottom:12px"></i>
+        <h2>Wembley Central Masjid</h2>
+        <p style="opacity:0.9;font-size:13px">Registered Charity No. 285630</p>
+      </div>
+      <div class="section-card">
+        <p>Wembley Central Masjid is unique in that along with providing a beautiful sanctuary for worship, it also incorporates an educational institute. The Masjid serves as a community center for residents while the Madrassah offers beginner through advanced classes in various Islamic sciences.</p>
+      </div>
+      <div class="section-card">
+        <h3 class="card-title">Our Aspiration</h3>
+        <p>The time has come to raise up a new wave of learned Muslims who have been born, bred, and educated at home. Wembley Central Masjid aspires to prepare these future leaders to take on the challenges for generations to come.</p>
+      </div>
+      <div class="section-card">
+        <h3 class="card-title">Address</h3>
+        <p>35-37 Ealing Road<br>Wembley, Middlesex<br>HA0 4AE</p>
+        <button class="btn-primary" onclick="alert('Opens Maps')"><i class="fas fa-directions"></i> Get Directions</button>
+      </div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="screen sub-screen" id="screen-news">
+      <div class="screen-title-bar"><h2>Latest News</h2></div>
+      <div id="newsList" class="news-list"></div>
+    </div>
+
+    <!-- ASK THE SCHOLAR -->
+    <div class="screen sub-screen" id="screen-ask-scholar">
+      <div class="scholar-header" style="background:#159778;padding:24px;color:#fff;text-align:center">
+        <i class="fas fa-question-circle" style="font-size:42px;margin-bottom:8px"></i>
+        <h2>Ask the Scholar</h2>
+        <p style="opacity:0.9;font-size:13px">Looking for some advice? Ask the Scholar about it.</p>
+      </div>
+      <div class="section-card">
+        <form id="scholarForm" onsubmit="submitScholarForm(event)">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label>Your Question</label>
+            <textarea placeholder="Type your question here..." rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-full">Submit Question</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- QIBLA -->
+    <div class="screen sub-screen" id="screen-qibla">
+      <div class="qibla-container">
+        <h2>Qibla Direction</h2>
+        <div class="qibla-compass">
+          <div class="compass-ring">
+            <div class="compass-needle" id="qiblaNeedle">
+              <div class="needle-point"></div>
+            </div>
+            <div class="compass-n">N</div>
+            <div class="compass-e">E</div>
+            <div class="compass-s">S</div>
+            <div class="compass-w">W</div>
+            <div class="kaaba-icon"><i class="fas fa-kaaba"></i></div>
+          </div>
+        </div>
+        <p class="qibla-info">Qibla direction from Wembley: <strong>119° SE</strong></p>
+        <p class="qibla-note">Point the top of your phone towards North for accurate direction</p>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="screen sub-screen" id="screen-contact">
+      <div class="screen-title-bar"><h2>Contact Us</h2></div>
+      <div class="contact-cards">
+        <div class="contact-card" onclick="alert('Calling...')">
+          <i class="fas fa-phone"></i>
+          <div><strong>Phone</strong><p>020 8900 9673</p></div>
+        </div>
+        <div class="contact-card" onclick="alert('Opening email...')">
+          <i class="fas fa-envelope"></i>
+          <div><strong>Email</strong><p>wembleycentralmasjid@gmail.com</p></div>
+        </div>
+        <div class="contact-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <div><strong>Address</strong><p>35-37 Ealing Road, Wembley, Middlesex, HA0 4AE</p></div>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        <i class="fas fa-map"></i>
+        <p>Map View</p>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="screen sub-screen" id="screen-services">
+      <div class="screen-title-bar"><h2>Our Services</h2></div>
+      <div class="services-grid">
+        <div class="service-card"><div class="service-icon"><i class="fas fa-heart"></i></div><h3>Nikaah</h3><p>Book at least 3 weeks in advance</p></div>
+        <div class="service-card"><div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div><h3>Zakaat & Sadaqah</h3><p>Disbursement services</p></div>
+        <div class="service-card"><div class="service-icon"><i class="fas fa-moon"></i></div><h3>Funeral</h3><p>Support during bereavement</p></div>
+        <div class="service-card"><div class="service-icon"><i class="fas fa-door-open"></i></div><h3>Open Days</h3><p>Community visits welcome</p></div>
+        <div class="service-card"><div class="service-icon"><i class="fas fa-school"></i></div><h3>School Visits</h3><p>Educational outreach</p></div>
+      </div>
+    </div>
+
+    <!-- VIRTUAL TOUR -->
+    <div class="screen sub-screen" id="screen-tour">
+      <div class="tour-placeholder">
+        <i class="fas fa-vr-cardboard" style="font-size:64px;color:#159778;margin-bottom:16px"></i>
+        <h2>360° Mosque Tour</h2>
+        <p>Explore the Masjid from anywhere</p>
+        <button class="btn-primary" onclick="alert('Opens 360° tour')">Start Tour</button>
+      </div>
+    </div>
+
+    <!-- STADIUM EVENT DAYS (Parking) -->
+    <div class="screen sub-screen" id="screen-stadium">
+      <div class="stadium-header" style="background:linear-gradient(135deg,#0D47A1,#1565C0);padding:24px;color:#fff;text-align:center">
+        <i class="fas fa-futbol" style="font-size:42px;margin-bottom:8px"></i>
+        <h2>Wembley Stadium Event Days</h2>
+        <p style="opacity:0.9;font-size:13px">Parking information for Masjid visitors</p>
+      </div>
+      <div class="section-card">
+        <h3 class="card-title"><i class="fas fa-car" style="color:var(--green);margin-right:6px"></i> Parking Notice</h3>
+        <p style="font-size:14px;line-height:1.5;color:var(--text-light)">On Wembley Stadium event days, there are significant parking restrictions and increased traffic around the Masjid. Please plan your journey in advance and consider using public transport where possible.</p>
+      </div>
+      <div class="section-card">
+        <h3 class="card-title"><i class="fas fa-calendar" style="color:var(--green);margin-right:6px"></i> Upcoming Event Days</h3>
+        <div class="stadium-dates">
+          <div class="stadium-date"><span class="stadium-day">Sun</span><span class="stadium-full">12th April</span></div>
+          <div class="stadium-date"><span class="stadium-day">Tue</span><span class="stadium-full">14th April</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sat</span><span class="stadium-full">18th April</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sat</span><span class="stadium-full">25th April</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sun</span><span class="stadium-full">26th April</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sun</span><span class="stadium-full">10th May</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sat</span><span class="stadium-full">16th May</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sat</span><span class="stadium-full">30th May</span></div>
+          <div class="stadium-date"><span class="stadium-day">Sun</span><span class="stadium-full">31st May</span></div>
+        </div>
+      </div>
+      <div class="section-card">
+        <h3 class="card-title"><i class="fas fa-info-circle" style="color:var(--green);margin-right:6px"></i> Tips</h3>
+        <p style="font-size:13px;line-height:1.6;color:var(--text-light)">
+          <strong>Arrive early</strong> to secure parking near the Masjid.<br><br>
+          <strong>Use public transport</strong> where possible. Wembley Park station is a short walk away.<br><br>
+          <strong>Parking restrictions</strong> are enforced on surrounding streets. Check signage before parking.<br><br>
+          <strong>Allow extra time</strong> for your journey as roads around Ealing Road get very busy.
+        </p>
+      </div>
+    </div>
+
+    <!-- DONATE DETAIL -->
+    <div class="screen sub-screen" id="screen-donate-detail">
+      <div class="donate-detail-header" id="donateDetailHeader">
+        <i class="fas fa-hand-holding-heart" style="font-size:42px;margin-bottom:8px"></i>
+        <h2 id="donateDetailTitle">Donation</h2>
+      </div>
+      <div class="section-card">
+        <p id="donateDetailDesc"></p>
+        <div class="amount-grid">
+          <button class="amount-btn" onclick="selectAmount(this, 10)">£10</button>
+          <button class="amount-btn" onclick="selectAmount(this, 20)">£20</button>
+          <button class="amount-btn" onclick="selectAmount(this, 50)">£50</button>
+          <button class="amount-btn" onclick="selectAmount(this, 100)">£100</button>
+        </div>
+        <div class="form-group" style="margin-top:16px">
+          <label>Custom Amount</label>
+          <div class="amount-input-wrap">
+            <span class="currency">£</span>
+            <input type="number" id="customAmount" placeholder="Enter amount">
+          </div>
+        </div>
+        <div class="donate-frequency">
+          <button class="freq-btn active">One-off</button>
+          <button class="freq-btn">Monthly</button>
+        </div>
+        <button class="btn-donate-submit" onclick="alert('Payment screen would open here')">
+          Donate Now <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Tab Bar -->
+  <div class="tab-bar">
+    <div class="tab active" data-tab="home" onclick="showScreen('home')">
+      <i class="fas fa-home"></i><span>Home</span>
+    </div>
+    <div class="tab" data-tab="events" onclick="showScreen('events')">
+      <i class="fas fa-calendar-alt"></i><span>Events</span>
+    </div>
+    <div class="tab" data-tab="donate" onclick="showScreen('donate')">
+      <i class="fas fa-hand-holding-heart"></i><span>Donate</span>
+    </div>
+    <div class="tab" data-tab="madrasah" onclick="showScreen('madrasah')">
+      <i class="fas fa-book-open"></i><span>Madrasah</span>
+    </div>
+    <div class="tab" data-tab="more" onclick="showScreen('more')">
+      <i class="fas fa-ellipsis-h"></i><span>More</span>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
